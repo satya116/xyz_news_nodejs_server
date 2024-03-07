@@ -1,24 +1,40 @@
-const NewsModel = require("../models/mock_test_model");
+const NewsModel = require("../models/news_model");
+
+// bulk news creation
+// await Character.create([{ name: 'Will Riker' }, { name: 'Geordi LaForge' }]);
 
 class NewsController {
 
     async createNews(req, res) {
         let news = req.body;
 
-        NewsModel.create(news).then(
-            () => {
-                res.status(200).json({
-                    success: true,
-                    data: "News created success",
-                });
-                // check if logged in
-                // get the req.
-                // create mongodb instance
-            }
-        ).catch((error) => {
+        let { news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url } = req.body;
+
+        try {
+            await NewsModel.create({ news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url });
+            res.status(200).json({
+                success: true,
+                data: "News created success",
+            });
+        } catch (error) {
             console.error('Error retrieving documents:', error);
             res.status(500).json({ success: false, message: error.message });
-        });
+        }
+
+        // NewsModel.create(news).then(
+        //     () => {
+        //         res.status(200).json({
+        //             success: true,
+        //             data: "News created success",
+        //         });
+        //         // check if logged in
+        //         // get the req.
+        //         // create mongodb instance
+        //     }
+        // ).catch((error) => {
+        //     console.error('Error retrieving documents:', error);
+        //     res.status(500).json({ success: false, message: error.message });
+        // });
     }
 
     async getAllNews(req, res) {
