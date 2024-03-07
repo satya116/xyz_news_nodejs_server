@@ -6,9 +6,8 @@ const NewsModel = require("../models/news_model");
 class NewsController {
 
     async createNews(req, res) {
-        let news = req.body;
 
-        let { news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url } = req.body;
+        const { news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url } = req.body;
 
         try {
             await NewsModel.create({ news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url });

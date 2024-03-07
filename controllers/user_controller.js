@@ -4,7 +4,6 @@ const S3 = require("../services/s3");
 
 class UserController {
 
-
     async createUser(req, res) {
         let user = req.body;
 

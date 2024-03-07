@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 var cors = require('cors')
 
+//
+console.log("Welcome to", process.env.NODE_ENV);
 // const BlogModel = require('./db/mongoose');
 
 const connectDB = require('./db/connect_db');
