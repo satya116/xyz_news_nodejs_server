@@ -71,7 +71,16 @@ const NewsSchema = new Schema({
         type: Number,
         default: 0,
         required: false
-    }
+    },
+    news_source: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Source',
+        required: false,
+    },
+    news_source_url: {
+        type: String,
+        required: false,
+    },
 });
 
 // Create model
