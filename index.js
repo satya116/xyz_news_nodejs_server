@@ -25,7 +25,7 @@ const PORT = 5000;
 
 app.get('/', (req, res) => {
     console.log("uguguuuu");
-    res.send('Hello, Express!');
+    res.send('Hello there, v0.0.1');
 });
 app.get('/health', (req, res) => {
     res.send('Server is running healthy.');
