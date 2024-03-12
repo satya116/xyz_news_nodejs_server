@@ -7,7 +7,11 @@ class NewsController {
 
     async createNews(req, res) {
 
-        const { news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url } = req.body;
+        const { news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url, admin_access_token } = req.body;
+
+        if (admin_access_token != process.env.ADMIN_ACCESS_TOKEN) {
+            return res.send("You are not allowed to create news");
+        }
 
         try {
             await NewsModel.create({ news_title, news_in_short, news_in_detail, tags, news_image_url, news_video_url });
