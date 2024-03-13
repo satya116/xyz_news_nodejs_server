@@ -41,8 +41,16 @@ class NewsController {
     }
 
     async getAllNews(req, res) {
+
+        const threeDaysAgo = new Date();
+        threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
         try {
-            let allNews = await NewsModel.find();
+            let allNews = await NewsModel.find({
+                created_at: { $gte: threeDaysAgo },
+                is_approved: true, // Only approved news
+                is_blocked: false, // Only unblocked news
+            }).sort({ created_at: -1 }).exec();
             res.status(200).json({
                 success: true,
                 data: allNews,
